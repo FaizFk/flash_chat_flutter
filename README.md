@@ -1,17 +1,7 @@
 # flash_chat
 
-A new Flutter project.
+Made a web app using Angela Yu tutorial and hosted the site after some tweeeks...
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"#flash_chat_flutter"
+This website helps to instantly send messages to each other after logging in...
+Make sure to wait 5 seconds to let the website open properly....I am new but I will try to improve and debug the code as much as I can....😊
+The website url is <a href="https://flash-chat-75659.web.app">https://flash-chat-75659.web.app</a>
