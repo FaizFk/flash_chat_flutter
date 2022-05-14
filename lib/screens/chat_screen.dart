@@ -81,7 +81,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       await _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
-                        'timestamp': FieldValue.serverTimestamp(),
+                        'timeStamp': FieldValue.serverTimestamp(),
                       });
                       textFieldController.clear();
                     },
@@ -105,7 +105,7 @@ class MessageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream:
-          _firestore.collection('messages').orderBy('timestamp').snapshots(),
+          _firestore.collection('messages').orderBy('timeStamp').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -114,15 +114,17 @@ class MessageBuilder extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data?.docs;
+        final messages = snapshot.data?.docs.reversed;
         List<Bubble> messageBubbles = [];
         if (messages != null) {
           for (var message in messages) {
             String messageSender = message.get('sender');
             String messageText = message.get('text');
+            var ts = message.get('timeStamp');
             messageBubbles.add(Bubble(
               sender: messageSender,
               text: messageText,
+              ts: ts,
               isMe: loggedInUser.email == messageSender,
             ));
           }
@@ -139,10 +141,11 @@ class MessageBuilder extends StatelessWidget {
 }
 
 class Bubble extends StatelessWidget {
-  Bubble({this.sender, this.text, @required this.isMe});
+  Bubble({this.sender, this.text, @required this.isMe, this.ts});
 
   String? sender;
   String? text;
+  Timestamp? ts;
   var isMe;
 
   @override
