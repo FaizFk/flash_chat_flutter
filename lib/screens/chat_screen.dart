@@ -114,7 +114,7 @@ class MessageBuilder extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data?.docs.reversed;
+        final messages = snapshot.data?.docs;
         List<Bubble> messageBubbles = [];
         if (messages != null) {
           for (var message in messages) {
