@@ -31,7 +31,6 @@ class _ChatScreenState extends State<ChatScreen> {
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -121,11 +120,9 @@ class MessageBuilder extends StatelessWidget {
           for (var message in messages) {
             String messageSender = message.get('sender');
             String messageText = message.get('text');
-            var ts = message.get('timeStamp');
             messageBubbles.add(Bubble(
               sender: messageSender,
               text: messageText,
-              ts: ts,
               isMe: loggedInUser.email == messageSender,
             ));
           }
@@ -142,11 +139,10 @@ class MessageBuilder extends StatelessWidget {
 }
 
 class Bubble extends StatelessWidget {
-  Bubble({this.sender, this.text, @required this.isMe, this.ts});
+  Bubble({this.sender, this.text, @required this.isMe});
 
   String? sender;
   String? text;
-  Timestamp? ts;
   var isMe;
 
   @override
@@ -158,7 +154,7 @@ class Bubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
-            '$sender ${ts.toString()}',
+            '$sender',
             style: TextStyle(color: Colors.black54, fontSize: 12),
           ),
           Material(
