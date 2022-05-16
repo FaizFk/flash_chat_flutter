@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore_web/cloud_firestore_web.dart';
 
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
@@ -81,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       await _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
-                        'timeStamp': Timestamp.now(),
+                        'timeStamp': DateTime.now(),
                       });
                       textFieldController.clear();
                     },
@@ -157,7 +158,7 @@ class Bubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
-            '$sender',
+            '$sender ${ts.toString()}',
             style: TextStyle(color: Colors.black54, fontSize: 12),
           ),
           Material(
